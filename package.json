@@ -1,0 +1,23 @@
+{
+  "name": "puppeteer-webshot",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "Andrei Apostu apst.andrei@gmail.com",
+  "license": "ISC",
+  "description": "A simple library to convert HTML/CSS/JS files or directories into images using Puppeteer. Supports dynamic content rendering with EJS for personalized templates and data injection.",
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/node": "^22.5.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "puppeteer": "^23.1.1"
+  }
+}
