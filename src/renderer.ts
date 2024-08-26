@@ -33,7 +33,7 @@ export class Renderer {
         page.setViewport(this.viewport);
 
         if (url.startsWith("http"))
-            await this.loadRemoteDir(page, url, data);
+            await this.loadRemoteDir(page, url);
         else
             await this.loadLocalDir(page, url, data);
 
@@ -45,8 +45,7 @@ export class Renderer {
         await page.close();
     }
 
-    private async loadRemoteDir(page: Page, url: string, data?: Data): Promise<void> {
-        // todo: handle ejs data
+    private async loadRemoteDir(page: Page, url: string): Promise<void> {
         await page.goto(
             url,
             {
