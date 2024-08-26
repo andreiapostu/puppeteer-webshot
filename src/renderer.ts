@@ -15,30 +15,12 @@ export class Renderer {
         return new Renderer(browser, viewport);
     }
 
-    public async close(): Promise<void> {
-        await this.browser.close();
-    }
-
     public setViewport(viewport: Viewport): void {
         this.viewport = viewport;
     }
 
-    private static sleep(ms: number): Promise<void> {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    private async loadRemoteDir(page: Page, url: string, data?: Data): Promise<void> {
-        // todo: handle ejs data
-        await page.goto(
-            url,
-            {
-                waitUntil: "networkidle0",
-            }
-        )
-    }
-
-    private async loadLocalDir(page: Page, url: string, data?: Data): Promise<void> {
-        // todo
+    public async close(): Promise<void> {
+        await this.browser.close();
     }
 
     public async render(
@@ -63,4 +45,21 @@ export class Renderer {
         await page.close();
     }
 
+    private async loadRemoteDir(page: Page, url: string, data?: Data): Promise<void> {
+        // todo: handle ejs data
+        await page.goto(
+            url,
+            {
+                waitUntil: "networkidle0",
+            }
+        )
+    }
+
+    private async loadLocalDir(page: Page, url: string, data?: Data): Promise<void> {
+        // todo
+    }
+
+    private static sleep(ms: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
