@@ -23,6 +23,10 @@ export class Renderer {
         this.viewport = viewport;
     }
 
+    private static sleep(ms: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     private async loadRemoteDir(page: Page, url: string, data?: Data): Promise<void> {
         // todo: handle ejs data
         await page.goto(
@@ -51,7 +55,8 @@ export class Renderer {
         else
             await this.loadLocalDir(page, url, data);
 
-        // todo: sleep
+        if (ms)
+            await Renderer.sleep(ms);
 
         await page.screenshot(options);
 
