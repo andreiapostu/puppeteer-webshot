@@ -23,6 +23,20 @@ export class Renderer {
         this.viewport = viewport;
     }
 
+    private async loadRemoteDir(page: Page, url: string, data?: Data): Promise<void> {
+        // todo: handle ejs data
+        await page.goto(
+            url,
+            {
+                waitUntil: "networkidle0",
+            }
+        )
+    }
+
+    private async loadLocalDir(page: Page, url: string, data?: Data): Promise<void> {
+        // todo
+    }
+
     public async render(
         url: string,
         options: ScreenshotOptions,
@@ -32,7 +46,14 @@ export class Renderer {
         const page = await this.browser.newPage();
         page.setViewport(this.viewport);
 
-        // ... todo ...
+        if (url.startsWith("http"))
+            await this.loadRemoteDir(page, url, data);
+        else
+            await this.loadLocalDir(page, url, data);
+
+        // todo: sleep
+
+        await page.screenshot(options);
 
         await page.close();
     }
