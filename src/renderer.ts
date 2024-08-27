@@ -1,13 +1,16 @@
 import puppeteer, { Browser, Page, ScreenshotOptions, Viewport } from 'puppeteer';
-import ejs, { Data } from 'ejs';
+import { Data } from 'ejs';
+import { WebServer } from './webserver';
 
 export class Renderer {
     private browser: Browser;
     private viewport: Viewport;
+    private port: number;
 
-    private constructor(browser: Browser, viewport: Viewport) {
+    private constructor(browser: Browser, viewport: Viewport, port: number = 4732) {
         this.browser = browser;
         this.viewport = viewport;
+        this.port = port;
     }
 
     public static async create(viewport: Viewport): Promise<Renderer> {
@@ -54,8 +57,10 @@ export class Renderer {
         )
     }
 
-    private async loadLocalDir(page: Page, url: string, data?: Data): Promise<void> {
-        // todo
+    private async loadLocalDir(page: Page, path: string, data?: Data): Promise<void> {
+        const webserver = new WebServer(this.port, path, data);
+        await this.loadRemoteDir(page, `http://localhost:${this.port}/`);
+        webserver.stop();
     }
 
     private static sleep(ms: number): Promise<void> {
