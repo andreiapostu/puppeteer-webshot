@@ -1,4 +1,4 @@
-import puppeteer, { Browser, Page, ScreenshotOptions, Viewport } from 'puppeteer';
+import puppeteer, { Browser, Page, ScreenshotOptions, PDFOptions, Viewport } from 'puppeteer';
 import { Data } from 'ejs';
 import { WebServer } from './webserver';
 
@@ -30,6 +30,19 @@ export class Renderer {
         const page = await this.loadPage(url, viewport, data, delayMs);
 
         await page.screenshot(options);
+
+        await page.close();
+    }
+
+    public async pdf(
+        url: string,
+        options: PDFOptions,
+        data?: Data,
+        delayMs?: number,
+    ): Promise<void> {
+        const page = await this.loadPage(url, undefined, data, delayMs);
+
+        await page.pdf(options);
 
         await page.close();
     }
