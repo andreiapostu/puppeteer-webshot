@@ -1,7 +1,8 @@
 # Node & Typescript
+src/
+tsconfig.json
 node_modules/
-dist/
-*.d.ts
+package-lock.json
 
 # Logs
 *.log
