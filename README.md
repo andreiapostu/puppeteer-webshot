@@ -14,7 +14,7 @@ npm install puppeteer-webshot
 ```ts
 import { Renderer } from "puppeteer-webshot";
 
-const renderer = await Renderer.create({ width: 1280, height: 720 });
-await renderer.render("https://example.com", { path: "shot.png" });
+const renderer = await Renderer.init();
+await renderer.image("https://example.com", { width: 1280, height: 720 }, { path: "shot.png" });
 await renderer.close();
 ```
