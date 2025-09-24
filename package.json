@@ -8,9 +8,9 @@
     "watch": "tsc --watch"
   },
   "keywords": [],
-  "author": "Andrei Apostu apst.andrei@gmail.com",
+  "author": "Andrei Apostu andrei@aapostu.com",
   "license": "ISC",
-  "description": "A simple library to convert HTML/CSS/JS files or directories into images using Puppeteer. Supports dynamic content rendering with EJS for personalized templates and data injection.",
+  "description": "A library for rendering web content into images or PDFs using Puppeteer. Supports both static and dynamic pages, with EJS integration for customizable templates and data-driven rendering.",
   "devDependencies": {
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.3",
