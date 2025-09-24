@@ -2,15 +2,24 @@
   "name": "puppeteer-webshot",
   "version": "1.0.0",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",               
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
     "watch": "tsc --watch"
   },
-  "keywords": [],
-  "author": "Andrei Apostu andrei@aapostu.com",
-  "license": "ISC",
+  "keywords": ["puppeteer", "screenshot", "to", "pdf", "png", "jpeg", "jpg", "render", "renderer", "ejs", "web", "webshot"],
+  "author": "Andrei Apostu <andrei@aapostu.com>",
+  "license": "MIT",
   "description": "A library for rendering web content into images or PDFs using Puppeteer. Supports both static and dynamic pages, with EJS integration for customizable templates and data-driven rendering.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Andrei-17/puppeteer-webshot.git"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md"
+  ],
   "devDependencies": {
     "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.3",
