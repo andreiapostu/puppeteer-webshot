@@ -1,6 +1,6 @@
 {
   "name": "puppeteer-webshot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -20,7 +20,8 @@
     "renderer",
     "ejs",
     "web",
-    "webshot"
+    "webshot",
+    "metadata"
   ],
   "author": "Andrei Apostu <andrei@aapostu.com>",
   "license": "MIT",
