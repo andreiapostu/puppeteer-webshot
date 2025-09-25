@@ -33,7 +33,7 @@ export class Renderer {
         await page.close();
 
         if (config.metadata && config.options.path)
-            await applyPdfMetadata(config.options.path, config.metadata);
+            await applyImageMetadata(config.options.path, config.metadata);
     }
 
     public async pdf(
