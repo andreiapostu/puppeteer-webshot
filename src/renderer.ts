@@ -1,6 +1,7 @@
-import puppeteer, { Browser, Page, ScreenshotOptions, PDFOptions, Viewport } from 'puppeteer';
-import { Data } from 'ejs';
+import puppeteer, { Browser, Page } from 'puppeteer';
 import { WebServer } from './webserver';
+import { ImageRenderConfig, PDFRenderConfig } from './types';
+import { Data } from 'ejs';
 
 export class Renderer {
     private browser: Browser;
@@ -22,43 +23,38 @@ export class Renderer {
 
     public async image(
         url: string,
-        viewport: Viewport,
-        options: ScreenshotOptions,
-        data?: Data,
-        delayMs?: number,
+        config: ImageRenderConfig,
     ): Promise<void> {
-        const page = await this.loadPage(url, viewport, data, delayMs);
+        const page = await this.loadPage(url, config);
 
-        await page.screenshot(options);
+        await page.screenshot(config.options);
 
         await page.close();
     }
 
     public async pdf(
         url: string,
-        options: PDFOptions,
-        data?: Data,
-        delayMs?: number,
+        config: PDFRenderConfig,
     ): Promise<void> {
-        const page = await this.loadPage(url, undefined, data, delayMs);
+        const page = await this.loadPage(url, config);
 
-        await page.pdf(options);
+        await page.pdf(config.options);
 
         await page.close();
     }
 
-    private async loadPage(url: string, viewport?: Viewport, data?: Data, delayMs?: number): Promise<Page> {
+    private async loadPage(url: string, config: ImageRenderConfig | PDFRenderConfig): Promise<Page> {
         const page = await this.browser.newPage();
-        if (viewport)
-            page.setViewport(viewport);
+        if ("viewport" in config && config.viewport)
+            page.setViewport(config.viewport);
 
         if (url.startsWith("http"))
             await this.loadRemoteDir(page, url);
         else
-            await this.loadLocalDir(page, url, data);
+            await this.loadLocalDir(page, url, config.data);
 
-        if (delayMs)
-            await Renderer.sleep(delayMs);
+        if (config.delayMs)
+            await Renderer.sleep(config.delayMs);
 
         return page;
     }
