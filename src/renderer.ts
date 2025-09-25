@@ -1,5 +1,6 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { WebServer } from './webserver';
+import { applyImageMetadata, applyPdfMetadata } from './metadata';
 import { ImageRenderConfig, PDFRenderConfig } from './types';
 import { Data } from 'ejs';
 
@@ -30,6 +31,9 @@ export class Renderer {
         await page.screenshot(config.options);
 
         await page.close();
+
+        if (config.metadata && config.options.path)
+            await applyPdfMetadata(config.options.path, config.metadata);
     }
 
     public async pdf(
@@ -41,6 +45,9 @@ export class Renderer {
         await page.pdf(config.options);
 
         await page.close();
+
+        if (config.metadata && config.options.path)
+            await applyPdfMetadata(config.options.path, config.metadata);
     }
 
     private async loadPage(url: string, config: ImageRenderConfig | PDFRenderConfig): Promise<Page> {
