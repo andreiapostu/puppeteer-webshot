@@ -2,7 +2,7 @@
   "name": "puppeteer-webshot",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",               
+  "types": "dist/index.d.ts",
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsc",
@@ -29,6 +29,7 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "pdf-lib": "^1.17.1",
     "puppeteer": "^24.22.2"
   }
 }
