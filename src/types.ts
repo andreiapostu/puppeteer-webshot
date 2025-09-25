@@ -17,7 +17,13 @@ export interface PDFRenderConfig {
 }
 
 export interface ImageMetadata {
-    // todo
+    title?: string;
+    author?: string;
+    copyright?: string;
+    software?: string;
+    creationDate?: Date;
+    keywords?: string[];
+    custom?: Record<string, string | number | boolean>;
 }
 
 export interface PDFMetadata {

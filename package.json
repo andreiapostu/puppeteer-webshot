@@ -8,7 +8,20 @@
     "build": "tsc",
     "watch": "tsc --watch"
   },
-  "keywords": ["puppeteer", "screenshot", "to", "pdf", "png", "jpeg", "jpg", "render", "renderer", "ejs", "web", "webshot"],
+  "keywords": [
+    "puppeteer",
+    "screenshot",
+    "to",
+    "pdf",
+    "png",
+    "jpeg",
+    "jpg",
+    "render",
+    "renderer",
+    "ejs",
+    "web",
+    "webshot"
+  ],
   "author": "Andrei Apostu <andrei@aapostu.com>",
   "license": "MIT",
   "description": "A library for rendering web content into images or PDFs using Puppeteer. Supports both static and dynamic pages, with EJS integration for customizable templates and data-driven rendering.",
@@ -30,6 +43,7 @@
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "pdf-lib": "^1.17.1",
-    "puppeteer": "^24.22.2"
+    "puppeteer": "^24.22.2",
+    "sharp": "^0.34.4"
   }
 }
