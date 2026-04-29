@@ -103,7 +103,7 @@ describe("Metadata Processor", () => {
             await applyPdfMetadata(tempPath, mockPdfMetadata);
 
             const docBytes = await fs.readFile(tempPath);
-            const doc = await PDFDocument.load(docBytes);
+            const doc = await PDFDocument.load(docBytes, { updateMetadata: false });
 
             expect(doc.getTitle()).toBe(mockPdfMetadata.title);
             expect(doc.getAuthor()).toBe(mockPdfMetadata.author);

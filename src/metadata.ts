@@ -42,7 +42,7 @@ export async function applyPdfMetadata(
     metadata: PDFMetadata
 ): Promise<void> {
     const input = await fs.readFile(path);
-    const doc = await PDFDocument.load(input);
+    const doc = await PDFDocument.load(input, { updateMetadata: false });
 
     if (metadata.title) doc.setTitle(metadata.title);
     if (metadata.author) doc.setAuthor(metadata.author);
