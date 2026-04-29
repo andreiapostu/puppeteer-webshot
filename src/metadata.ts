@@ -9,23 +9,30 @@ export async function applyImageMetadata(
 ): Promise<void> {
     const input = await fs.readFile(path);
 
-    const sharpMetadata: Record<string, any> = {};
+    const exifData: Record<string, any> = {
+        IFD0: {},
+        IFD2: {},
+    };
 
-    if (metadata.title) sharpMetadata.title = metadata.title;
-    if (metadata.author) sharpMetadata.author = metadata.author;
-    if (metadata.copyright) sharpMetadata.copyright = metadata.copyright;
-    if (metadata.software) sharpMetadata.software = metadata.software;
-    if (metadata.creationDate)
-        sharpMetadata.creationTime = metadata.creationDate.toISOString();
+    if (metadata.title) exifData.IFD0.ImageDescription = metadata.title;
+    if (metadata.author) exifData.IFD0.Artist = metadata.author;
+    if (metadata.copyright) exifData.IFD0.Copyright = metadata.copyright;
+    if (metadata.software) exifData.IFD0.Software = metadata.software;
+
+    if (metadata.creationDate) {
+        const dateStr = metadata.creationDate.toISOString().replace(/-/g, ':').replace('T', ' ').substring(0, 19);
+        exifData.IFD0.DateTime = dateStr;
+        exifData.IFD2.DateTimeOriginal = dateStr;
+    }
 
     if (metadata.keywords || metadata.custom) {
-        sharpMetadata.comment = JSON.stringify({
+        exifData.IFD2.UserComment = JSON.stringify({
             keywords: metadata.keywords,
             custom: metadata.custom,
         });
     }
 
-    const image = sharp(input).withMetadata(sharpMetadata);
+    const image = sharp(input).withMetadata({ exif: exifData });
     const buffer = await image.toBuffer();
     await fs.writeFile(path, buffer);
 }
