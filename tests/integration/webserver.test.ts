@@ -2,28 +2,15 @@ import { describe, it, expect } from "vitest";
 import { WebServer } from "../../src/webserver";
 import path from "path";
 import fs from "fs";
-import { createServer } from "net";
-
-async function getAvailablePort(): Promise<number> {
-    return new Promise((resolve, reject) => {
-        const server = createServer();
-        server.unref();
-        server.on('error', reject);
-        server.listen(0, '127.0.0.1', () => {
-            const port = (server.address() as any).port;
-            server.close(() => resolve(port));
-        });
-    });
-}
 
 describe("WebServer", () => {
     const fixturesDir = path.resolve(__dirname, "../fixtures");
 
     it("should start up, respond to requests, and shut down gracefully", async () => {
-        const port = await getAvailablePort();
         const htmlPath = path.join(fixturesDir, "test.html");
 
-        const server = new WebServer(port, htmlPath);
+        const server = new WebServer(0, htmlPath);
+        const port = server.port;
 
         const res = await fetch(`http://127.0.0.1:${port}`, { headers: { 'Connection': 'close' } });
         await res.text();
@@ -35,10 +22,10 @@ describe("WebServer", () => {
     });
 
     it("should serve the right HTML content", async () => {
-        const port = await getAvailablePort();
         const htmlPath = path.join(fixturesDir, "test.html");
 
-        const server = new WebServer(port, htmlPath);
+        const server = new WebServer(0, htmlPath);
+        const port = server.port;
 
         const res = await fetch(`http://127.0.0.1:${port}`, { headers: { 'Connection': 'close' } });
         expect(res.status).toBe(200);
@@ -51,11 +38,11 @@ describe("WebServer", () => {
     });
 
     it("should render the right EJS content", async () => {
-        const port = await getAvailablePort();
         const ejsPath = path.join(fixturesDir, "test.ejs");
 
         const renderData = { title: "Test" };
-        const server = new WebServer(port, ejsPath, renderData);
+        const server = new WebServer(0, ejsPath, renderData);
+        const port = server.port;
 
         const res = await fetch(`http://127.0.0.1:${port}`, { headers: { 'Connection': 'close' } });
         expect(res.status).toBe(200);

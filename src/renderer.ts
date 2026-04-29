@@ -8,7 +8,7 @@ export class Renderer {
     private browser: Browser;
     private port: number;
 
-    private constructor(browser: Browser, port: number = 4732) {
+    private constructor(browser: Browser, port: number = 0) {
         this.browser = browser;
         this.port = port;
     }
@@ -77,7 +77,7 @@ export class Renderer {
 
     private async loadLocalDir(page: Page, path: string, data?: Data): Promise<void> {
         const webserver = new WebServer(this.port, path, data);
-        await this.loadRemoteDir(page, `http://localhost:${this.port}/`);
+        await this.loadRemoteDir(page, `http://localhost:${webserver.port}/`);
         webserver.stop();
     }
 

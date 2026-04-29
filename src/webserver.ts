@@ -33,6 +33,14 @@ export class WebServer {
         this.server = this.app.listen(port);
     }
 
+    public get port(): number {
+        const address = this.server.address();
+        if (address && typeof address === 'object') {
+            return address.port;
+        }
+        throw new Error("Server is not listening or address is unavailable");
+    }
+
     public stop(): void {
         this.server.close();
     }
