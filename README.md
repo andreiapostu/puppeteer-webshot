@@ -64,13 +64,18 @@ main();
 
 ## 📚 API
 
-### `Renderer.init(port?: number): Promise<Renderer>`
+### `Renderer.init(options?: RendererInitOptions): Promise<Renderer>`
 
 Initializes a new `Renderer` instance and launches the underlying Puppeteer browser.
 
-* **`port`** *(optional, number)*: The port used by the internal server to serve local files. 
-    * **Default:** `0` (The OS will automatically assign the next available ephemeral port).
-    * If a specific port is provided, the renderer will attempt to use it exactly as requested.
+**Options (`RendererInitOptions`):**
+
+*   **`port`** *(optional, number)*: The port used by the internal server to serve local files.
+    *   **Default:** `0` (The OS will automatically assign the next available ephemeral port).
+*   **`sandbox`** *(optional, boolean)*: A toggle to enable or disable the Chromium sandbox.
+    *   **Default:** `true`.
+    *   Set to `false` for Docker environments or CI pipelines where the sandbox might cause permission issues.
+*   **`puppeteerOptions`** *(optional, [LaunchOptions](https://pptr.dev/api/puppeteer.launchoptions))*: Advanced configuration passed directly to Puppeteer's `launch` method. Use this if you need to specify the `executablePath`, `headless` mode, or additional `args`.
 
 ---
 
