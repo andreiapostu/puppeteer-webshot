@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/puppeteer-webshot.svg)](https://www.npmjs.com/package/puppeteer-webshot)
 [![npm downloads](https://img.shields.io/npm/dm/puppeteer-webshot.svg)](https://www.npmjs.com/package/puppeteer-webshot)
 
-![puppeteer-webshot banner](./.github/banner.png)
+![puppeteer-webshot banner](https://raw.githubusercontent.com/andreiapostu/puppeteer-webshot/main/.github/banner.png)
 
 Render web content into **images** or **PDFs**  with [Puppeteer](https://pptr.dev/) and optional [EJS](https://ejs.co/) template rendering. 
 This package provides a thin wrapper around Puppeteer for simple, high-quality output generation with metadata support.
