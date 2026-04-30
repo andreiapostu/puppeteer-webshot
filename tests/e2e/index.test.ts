@@ -14,7 +14,11 @@ describe("Renderer E2E", { timeout: 15000 }, () => {
 
     beforeAll(async () => {
         await fs.mkdir(tempDir, { recursive: true });
-        renderer = await Renderer.init();
+
+        const isCI = process.env.CI === "true";
+        renderer = await Renderer.init({
+            sandbox: !isCI,
+        });
     });
 
     afterAll(async () => {
