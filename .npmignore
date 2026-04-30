@@ -14,3 +14,7 @@ yarn-error.log*
 .vscode/
 *.swp
 .DS_Store
+
+# Distribution Exclusions
+.github/
+tests/
