@@ -1,20 +1,43 @@
 import puppeteer, { Browser, Page } from 'puppeteer';
 import { WebServer } from './webserver';
 import { applyImageMetadata, applyPdfMetadata } from './metadata';
-import { ImageRenderConfig, PDFRenderConfig } from './types';
+import { ImageRenderConfig, PDFRenderConfig, RendererInitOptions } from './types';
 import { Data } from 'ejs';
 
 export class Renderer {
     private browser: Browser;
     private port: number;
 
-    private constructor(browser: Browser, port: number = 0) {
+    private constructor(browser: Browser, port: number) {
         this.browser = browser;
         this.port = port;
     }
 
-    public static async init(port?: number): Promise<Renderer> {
-        const browser = await puppeteer.launch();
+    public static async init(options: RendererInitOptions = {}): Promise<Renderer> {
+        const port = options.port ?? 0;
+        const sandbox = options.sandbox ?? true;
+        const puppeteerOptions = options.puppeteerOptions ?? {};
+
+        const launchArgs = new Set<string>();
+
+        if (!sandbox) {
+            launchArgs.add('--no-sandbox');
+            launchArgs.add('--disable-setuid-sandbox');
+            launchArgs.add('--disable-dev-shm-usage');
+        }
+
+        if (puppeteerOptions.args) {
+            for (const arg of puppeteerOptions.args) {
+                launchArgs.add(arg);
+            }
+        }
+
+        const finalLaunchOptions = {
+            ...puppeteerOptions,
+            args: Array.from(launchArgs),
+        };
+
+        const browser = await puppeteer.launch(finalLaunchOptions);
         return new Renderer(browser, port);
     }
 

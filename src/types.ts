@@ -1,5 +1,11 @@
-import { Viewport, ScreenshotOptions, PDFOptions } from "puppeteer";
+import { Viewport, ScreenshotOptions, PDFOptions, LaunchOptions } from "puppeteer";
 import { Data } from "ejs";
+
+export interface RendererInitOptions {
+    port?: number;
+    sandbox?: boolean;
+    puppeteerOptions?: LaunchOptions;
+}
 
 export interface ImageRenderConfig {
     viewport?: Viewport;
