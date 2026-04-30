@@ -30,7 +30,7 @@
   "description": "A library for rendering web content into images or PDFs using Puppeteer. Supports both static and dynamic pages, with EJS integration for customizable templates and data-driven rendering.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Andrei-17/puppeteer-webshot.git"
+    "url": "https://github.com/andreiapostu/puppeteer-webshot.git"
   },
   "files": [
     "dist/**/*",
