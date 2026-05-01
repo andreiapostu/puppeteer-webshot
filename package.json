@@ -45,7 +45,7 @@
     "vitest": "^4.1.4"
   },
   "dependencies": {
-    "ejs": "^3.1.10",
+    "ejs": "^5.0.2",
     "express": "^5.1.0",
     "pdf-lib": "^1.17.1",
     "puppeteer": "^24.22.2",
